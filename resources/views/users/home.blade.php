@@ -28,6 +28,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--dark);
+                background-color: #f5faff; /* Light, calming background color */
+    background-image: url('assets/img/medical-bg.jpg'); /* Subtle medical-themed background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
         }
 
         /* Utility Classes */
@@ -339,34 +344,123 @@
     </section>
 
 
- <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>About Us</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4" data-aos="fade-right">
-            <img src="assets/img/McDonald.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-              <p><b> Welcome to McDonald Consultancy. I am McDonald Wandere, an experienced specialist in physiotherapy.</b></p>
-              <li><b><i class="bi bi-chevron-right"></i>Our Mission</b>
-              <p>To offer evidence based, efficient and effective patient centered physiotherapy services to the world.</p>
-              <li><b><i class="bi bi-chevron-right"></i>Our Vision</b>
-              <p>Leader in rehabilitation health service</p>
-              <li><b><i class="bi bi-chevron-right"></i>Our Values </b> 
-              <p>-Professionalism</p>
-              <p>-Integrity</p>
-              <p>-Compassion</p>
-              <p>-Client centered</p>
-          </div>
-        </div>
-
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>About Us</h2>
+    </div>
+    <div class="row">
+      <!-- Image on the Left -->
+      <div class="col-lg-4" data-aos="fade-right">
+        <div class="about-image" style="background-image: url('assets/img/McDonald.jpg'); background-size: cover; background-position: center; height: 500px; border-radius: 8px;"></div>
       </div>
-    </section><!-- End About Section -->
+
+      <!-- About Us Content Slideshow on the Right -->
+      <div class="col-lg-8 pt-4 pt-lg-0" data-aos="fade-left">
+        <div id="aboutContentCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-inner">
+            <!-- Slide 1: Welcome Message -->
+            <div class="carousel-item active">
+              <div class="about-block">
+                <h3><b>Welcome to McDonald Consultancy</b></h3>
+                <p>I am McDonald Wandere, an experienced specialist in physiotherapy.</p>
+              </div>
+            </div>
+
+            <!-- Slide 2: Our Mission -->
+            <div class="carousel-item">
+              <div class="about-block">
+                <h3><b><i class="bi bi-chevron-right"></i> Our Mission</b></h3>
+                <p>To offer evidence-based, efficient, and effective patient-centered physiotherapy services to the world.</p>
+              </div>
+            </div>
+
+            <!-- Slide 3: Our Vision -->
+            <div class="carousel-item">
+              <div class="about-block">
+                <h3><b><i class="bi bi-chevron-right"></i> Our Vision</b></h3>
+                <p>Leader in rehabilitation health services.</p>
+              </div>
+            </div>
+
+            <!-- Slide 4: Our Values -->
+            <div class="carousel-item">
+              <div class="about-block">
+                <h3><b><i class="bi bi-chevron-right"></i> Our Values</b></h3>
+                <ul>
+                  <li>- Professionalism</li>
+                  <li>- Integrity</li>
+                  <li>- Compassion</li>
+                  <li>- Client-centered</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+<br>
+<br>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#aboutContentCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#aboutContentCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End About Section -->
+
+<!-- Optional: Add custom CSS to improve the visuals of the carousel -->
+<style>
+  .carousel-inner .carousel-item {
+    padding: 120px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .about-block h3 {
+    font-size: 2em; /* Larger font size for better readability */
+    margin-bottom: 15px;
+  }
+
+  .about-block p {
+    font-size: 1.2em; /* Slightly larger paragraph text */
+  }
+
+  .about-block ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .about-block ul li {
+    margin-bottom: 10px;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #007bff; /* Custom color for navigation icons */
+  }
+
+  /* Make the image and carousel content wider and taller */
+  .about-image {
+    width: 100%;
+    height: 500px; /* Increase height */
+    border-radius: 8px;
+  }
+
+  .carousel {
+    max-width: 100%; /* Ensure carousel takes full width */
+  }
+
+  /* Optional: Adjust the size of the container */
+  .container {
+    max-width: 1200px; /* Wider container */
+  }
+</style>
 
     <section id="services" class="services">
         <div class="container">
@@ -523,10 +617,10 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                <form class="contact-form" id="contact">
+                    <input type="text" placeholder="Your Name" id="name" required>
+                    <input type="email" placeholder="Your Email" id="email" required>
+                    <textarea rows="5" placeholder="Your Message" id="message" required></textarea>
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
@@ -565,4 +659,51 @@
 
     <a href="#" class="back-to-top">↑</a>
 </body>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var myCarousel = new bootstrap.Carousel(document.getElementById('aboutContentCarousel'), {
+      interval: 3000, // Autoplay every 3 seconds
+      ride: 'carousel'
+    });
+
+    // Pause autoplay when user hovers over the carousel
+    var carouselElement = document.getElementById('aboutContentCarousel');
+    carouselElement.addEventListener('mouseover', function() {
+      myCarousel.pause();
+    });
+
+    // Resume autoplay when user stops hovering
+    carouselElement.addEventListener('mouseout', function() {
+      myCarousel.cycle();
+    });
+  });
+</script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS with your user ID
+  emailjs.init("ji-JllioYH53QC20d");
+
+  // Event listener for form submission
+  document.getElementById("contact").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form from refreshing the page
+    
+    // Collect the form data
+    var formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value
+    };
+
+    // Send the email via EmailJS
+    emailjs.send("service_mp8hpm8", "template_eaa827h", formData)
+      .then(function(response) {
+        alert("Message sent successfully!");
+      }, function(error) {
+        alert("Failed to send message: " + error.text);
+      });
+  });
+</script>
 </html>

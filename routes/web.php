@@ -78,3 +78,8 @@ Route::post('/rate-doctor', [DoctorController::class, 'rateDoctor']);
 Route::post('/remind-patient', [DoctorController::class, 'remindPatient']);
 // Route for updating the status of a booking by ID
 Route::patch('/booking/{id}/update-status', [DoctorController::class, 'updateBookingStatus'])->name('booking.update-status');
+
+use App\Http\Controllers\PaymentController;
+
+Route::get('/payment', [PaymentController::class, 'showForm']);
+Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');

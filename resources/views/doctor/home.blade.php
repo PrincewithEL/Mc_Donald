@@ -346,7 +346,7 @@
         </a>        
         <a href="{{ route('profile') }}" class="nav-item">
             <i class="fas fa-user"></i>
-            Account
+            Profile
         </a>
         <form action="/logout" method="POST" style="margin: 0;">
             @csrf

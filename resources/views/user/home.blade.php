@@ -1015,16 +1015,62 @@
                         <input type="date" class="form-control" min="<?php echo date('Y-m-d'); ?>" id="date" name="date" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="start_time">Start Time</label>
-                        <input type="time" class="form-control" id="start_time" name="start_time" required>
-                    </div>
+<div class="form-group">
+    <label for="start_time">Start Time</label>
+    <select class="form-control" id="start_time" name="start_time" required>
+        <option value="">Select Hour</option>
+        <!-- Generate hours 00 to 23 -->
+        <script>
+            // Start and End times passed from PHP
+            var startTime = "{{ $startTime }}";  // Booking's start time (from the controller, e.g., "14:00")
+            var endTime = "{{ $endTime }}";      // Booking's end time (from the controller, e.g., "16:00")
+            
+            // Convert times to Date objects for comparison
+            var startTimeObj = new Date("1970-01-01T" + startTime + ":00Z");
+            var endTimeObj = new Date("1970-01-01T" + endTime + ":00Z");
 
-                    <div class="form-group">
-                        <label for="end_time">End Time</label>
-                        <input type="time" class="form-control" id="end_time" name="end_time">
-                        <small id="timeError" class="text-danger" style="display:none;color: red;">End Time must be after Start Time.</small>
-                    </div>
+            // Generate 24 hours of time options (00:00 to 23:00)
+            for (var i = 0; i < 24; i++) {
+                var time = (i < 10 ? '0' + i : i) + ':00';
+
+                // Convert current time to Date object
+                var currentTimeObj = new Date("1970-01-01T" + time + ":00Z");
+
+                // Disable times outside of the booking's range
+                if (currentTimeObj >= startTimeObj && currentTimeObj <= endTimeObj) {
+                    document.write('<option value="' + time + '" disabled>' + time + '</option>');
+                } else {
+                    document.write('<option value="' + time + '">' + time + '</option>');
+                }
+            }
+        </script>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="end_time">End Time</label>
+    <select class="form-control" id="end_time" name="end_time" required>
+        <option value="">Select Hour</option>
+        <!-- Same as above for End Time -->
+        <script>
+            for (var i = 0; i < 24; i++) {
+                var time = (i < 10 ? '0' + i : i) + ':00';
+
+                // Convert current time to Date object
+                var currentTimeObj = new Date("1970-01-01T" + time + ":00Z");
+
+                // Disable times outside of the booking's range
+                if (currentTimeObj >= startTimeObj && currentTimeObj <= endTimeObj) {
+                    document.write('<option value="' + time + '" disabled>' + time + '</option>');
+                } else {
+                    document.write('<option value="' + time + '">' + time + '</option>');
+                }
+            }
+        </script>
+    </select>
+    <small id="timeError" class="text-danger" style="display:none;color: red;">End Time must be after Start Time.</small>
+</div>
+
 
                     <div class="form-group">
                         <label for="details">Details</label>

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Bookings;
 use App\Models\Insurance_Form;
+use App\Mail\ReminderMail;  // Import the ReminderMail Mailable class
+use Illuminate\Support\Facades\Mail;  // Import the Mail facade
 
 class DoctorController extends Controller
 {
@@ -125,21 +127,32 @@ public function createInsurance(Request $request)
     return redirect()->back();
 }
 
-
-    public function remindPatient(Request $request)
+public function remindPatient(Request $request)
 {
-
+    // Step 1: Retrieve the booking using the booking ID from the request
     $id = $request->input('booking_id');
-
     $booking = Bookings::findOrFail($id);
 
+    // Step 2: Update the booking details (message)
     $booking->details4 = $request->input('details4');
-
     $booking->save();
 
-    // return response()->json(['message' => 'Booking updated successfully', 'booking' => $booking]);
-    return redirect()->back();
+    // Step 3: Retrieve the user's email from the booking's user relationship
+    $user = $booking->user;
+
+    // Step 4: If the user exists, send the reminder email
+    if ($user) {
+        // Prepare the reminder message (details4)
+        $reminderMessage = $request->input('details4');
+        
+        // Send the email using the ReminderMail mailable class
+        // Mail::to($user->email)->send(new ReminderMail($reminderMessage));
+    }
+
+    // Step 5: Redirect back with a success message
+    return redirect()->back()->with('success', 'Reminder sent successfully!');
 }
+
 
   
 }

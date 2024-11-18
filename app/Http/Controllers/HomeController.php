@@ -19,6 +19,17 @@ class HomeController extends Controller
 
         if (Auth::id()) {
             if (Auth::user()->user_type=='0') {
+                    // Retrieve all bookings that are not "Completed"
+    $unavailableBookings = Bookings::where('status', '!=', 'Completed')->get();
+    
+    // Get the start and end times from unavailable bookings
+    $unavailableTimes = [];
+    foreach ($unavailableBookings as $booking) {
+        $unavailableTimes[] = $booking->start_time; // You could store both start and end times if necessary
+        $unavailableTimes[] = $booking->end_time;
+    }
+    $startTime = $booking->start_time;  // Start time of the booking
+    $endTime = $booking->end_time;     
                         $users = user::all();
                        $booking = Bookings::with(['user', 'doctor', 'referralDoctor'])->get();
                         $forms = Insurance_Form::all();
@@ -30,9 +41,20 @@ class HomeController extends Controller
                         $docCount = user::where('user_type','doctor')->count();
                         $doctors = user::where('user_type','doctor')->get();
                         $admins = user::where('user_type','0')->get();
-                        return view('admin.home', compact('docCount', 'userCount', 'userdetails', 'usersCount', 'users', 'booking', 'forms', 'doctors', 'admins'));
+                        return view('admin.home', compact('docCount', 'userCount', 'userdetails', 'usersCount', 'users', 'booking', 'forms', 'doctors', 'admins', 'unavailableTimes', 'startTime', 'endTime'));
                     } 
         else if (Auth::user()->user_type=='doctor') {
+                // Retrieve all bookings that are not "Completed"
+    $unavailableBookings = Bookings::where('status', '!=', 'Completed')->get();
+    
+    // Get the start and end times from unavailable bookings
+    $unavailableTimes = [];
+    foreach ($unavailableBookings as $booking) {
+        $unavailableTimes[] = $booking->start_time; // You could store both start and end times if necessary
+        $unavailableTimes[] = $booking->end_time;
+    }
+    $startTime = $booking->start_time;  // Start time of the booking
+    $endTime = $booking->end_time;     
 // Fetch all users
 $users = User::all();
 
@@ -68,10 +90,22 @@ $doctors = User::where('user_type', 'doctor')->get();
 // Get all admins (users with the '0' user type)
 $admins = User::where('user_type', '0')->get();
                   
-                        return view('doctor.home', compact('bookingCount', 'avgRating', 'userdetails', 'activeBooking', 'users', 'booking', 'forms', 'doctors', 'admins'));
+                        return view('doctor.home', compact('bookingCount', 'avgRating', 'userdetails', 'activeBooking', 'users', 'booking', 'forms', 'doctors', 'admins', 'unavailableTimes', 'startTime', 'endTime'));
                     }    
         
         else if (Auth::user()->user_type=='user') {
+
+                // Retrieve all bookings that are not "Completed"
+    $unavailableBookings = Bookings::where('status', '!=', 'Completed')->get();
+    
+    // Get the start and end times from unavailable bookings
+    $unavailableTimes = [];
+    foreach ($unavailableBookings as $booking) {
+        $unavailableTimes[] = $booking->start_time; // You could store both start and end times if necessary
+        $unavailableTimes[] = $booking->end_time;
+    }
+   $startTime = $booking->start_time;  // Start time of the booking
+    $endTime = $booking->end_time;  
 // Fetch all users (with proper capitalization of the User model)
 $users = User::all();
 
@@ -114,7 +148,7 @@ $doctors = User::where('user_type', 'doctor')->get();
 $admins = User::where('user_type', '0')->get();
 
 // Pass the data to the view
-return view('user.home', compact('userdetails', 'users', 'booking', 'bookings', 'forms', 'doctors', 'admins', 'bookingCount', 'completedBooking', 'activeBooking'));
+return view('user.home', compact('userdetails', 'users', 'booking', 'bookings', 'forms', 'doctors', 'admins', 'bookingCount', 'completedBooking', 'activeBooking', 'unavailableTimes', 'startTime', 'endTime'));
 
                     }    
         
